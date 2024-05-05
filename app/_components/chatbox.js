@@ -6,7 +6,7 @@ const Message = ({ children, author = 'me' }) => {
   const isMe = author === 'me'
 
   return (
-    <div className={`flex grow-0${isMe ? 'ml-32 justify-end' : 'mr-32'}`}>
+    <div className={`flex ${isMe ? 'ml-32 justify-end' : 'mr-32'}`}>
       <span
         className={`rounded-lg p-2 text-white ${isMe ? 'bg-sky-600' : 'bg-gray-400'}`}
       >
@@ -17,12 +17,30 @@ const Message = ({ children, author = 'me' }) => {
 }
 
 export default function Chatbox() {
-  const messageEnd = useRef(null)
-  const [messages, setMessages] = useState(mockMessages)
+  const inputRef = useRef()
+  const messageEnd = useRef()
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([])
+
+  const isMessageEmpty = !message.trim().length
 
   useEffect(() => {
-    if (!messageEnd) messageEnd.scrollIntoView({ behaviour: 'smooth' })
+    messageEnd.current.scrollIntoView({ behaviour: 'smooth' })
   })
+
+  const onInput = (e) => setMessage(e.target.value)
+
+  const onSend = () => {
+    setMessages((prev) => [...prev, { message, author: 'me' }])
+    setMessage('')
+    inputRef.current.focus()
+  }
+
+  const onEnter = (e) => {
+    if (e.key !== 'Enter' || isMessageEmpty) return
+    onSend()
+    e.preventDefault()
+  }
 
   return (
     <main className="grid grid-rows-[1fr_6rem] overflow-hidden bg-gray-100">
@@ -34,12 +52,22 @@ export default function Chatbox() {
         ))}
         <div ref={messageEnd}></div>
       </div>
-      <form className="flex h-24 w-full">
+      <form onSubmit={onSend} className="flex h-24 w-full gap-2 px-4 pb-4">
         <textarea
-          className="flex-1 p-4"
+          ref={inputRef}
+          value={message}
+          className="flex-1 rounded-md border border-sky-500 p-4"
           placeholder="Type a message..."
+          onInput={onInput}
+          onKeyDown={onEnter}
         ></textarea>
-        <button className="bg-sky-600 p-6 text-white">Send</button>
+        <button
+          type="submit"
+          className="rounded-lg border-2 border-sky-900 bg-sky-600 p-6 text-white disabled:opacity-50"
+          disabled={isMessageEmpty}
+        >
+          Send
+        </button>
       </form>
     </main>
   )
