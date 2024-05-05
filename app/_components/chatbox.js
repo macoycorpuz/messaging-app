@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { mockMessages } from '../_lib/mockMessages'
 
 const Message = ({ children, author = 'me' }) => {
   const isMe = author === 'me'
