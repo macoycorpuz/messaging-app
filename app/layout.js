@@ -7,7 +7,7 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  title: 'Realtime Chat App',
+  title: 'Messaging App',
 }
 
 export default function RootLayout({ children }) {
