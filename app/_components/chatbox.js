@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import useSocket from '../_lib/useSocket'
 
 const Message = ({ children, author = 'me' }) => {
   const isMe = author === 'me'
@@ -20,6 +21,7 @@ export default function Chatbox() {
   const messageEnd = useRef()
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
+  const { isConnected } = useSocket()
 
   const isMessageEmpty = !message.trim().length
 
