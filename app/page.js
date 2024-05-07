@@ -1,12 +1,29 @@
-import Chatbox from './_components/chatbox'
-
-export default function Home() {
+export default function Login() {
   return (
-    <div className="grid min-h-screen grid-rows-[auto-1fr] overflow-hidden">
-      <header className="flex h-20 w-full items-center justify-center bg-sky-600 p-4">
-        <h1 className="text-3xl text-white">Realtime Chat</h1>
-      </header>
-      <Chatbox />
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-sm">
+        <h1 className="py-4 text-center text-2xl uppercase">
+          Choose your name
+        </h1>
+        <form className="flex flex-col p-4" action="#" method="POST">
+          <label htmlFor="username">Username</label>
+          <div className="mt-2">
+            <input
+              id="username"
+              name="username"
+              required
+              className="w-full rounded-md p-2 shadow-sm ring-1 ring-inset"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="mt-6 w-full rounded-md bg-sky-500 p-2.5 text-white hover:bg-sky-700"
+          >
+            Sign in
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
