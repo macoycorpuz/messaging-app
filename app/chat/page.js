@@ -1,12 +1,23 @@
-import Chatbox from './chatbox'
+'use client'
+import { useState } from 'react'
+import ChatPanel from './chatPanel'
+import Users from './users'
 
 export default function Chat() {
+  const currentUserId = 2
+  const [otherUserId, setOtherUserId] = useState(1)
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div className="grid min-h-screen grid-rows-[auto-1fr] overflow-hidden">
-      <header className="flex h-20 w-full items-center justify-center bg-sky-600 p-4">
-        <h1 className="text-3xl text-white">Messaging App</h1>
-      </header>
-      <Chatbox />
+    <div className="h-screen md:flex">
+      <Users
+        isOpen={isOpen}
+        currentUserId={currentUserId}
+        otherUserId={otherUserId}
+        onSelect={(id) => setOtherUserId(id)}
+        onClose={() => setIsOpen(false)}
+      />
+      <ChatPanel otherUserId={otherUserId} onBack={() => setIsOpen(true)} />
     </div>
   )
 }
