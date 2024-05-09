@@ -31,7 +31,7 @@ export default function Home() {
   }, [router])
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-dvh items-center justify-center">
       <div className="w-full max-w-sm">
         <h1 className="py-4 text-center text-2xl uppercase">messaging app</h1>
         <form className="flex flex-col pb-4" onSubmit={onSubmit}>

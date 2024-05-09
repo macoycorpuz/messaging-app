@@ -9,7 +9,7 @@ export default function Chat() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="h-screen md:flex">
+    <div className="h-dvh md:flex">
       <Users
         isOpen={isOpen}
         currentUserId={currentUserId}

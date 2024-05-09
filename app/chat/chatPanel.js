@@ -46,7 +46,7 @@ export default function ChatPanel({ otherUserId, onBack }) {
       </header>
 
       <main className="grid grid-rows-[1fr_6rem] overflow-hidden">
-        <div className="flex h-[calc(100vh-6rem-5rem)] flex-col gap-2 overflow-y-auto p-2">
+        <div className="flex h-[calc(100dvh-6rem-5rem)] flex-col gap-2 overflow-y-auto p-2">
           {messages.map((d, i) => (
             <MessageBox key={i} author={d.author}>
               {d.message}
