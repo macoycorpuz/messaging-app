@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server",
+    "dev": "nodemon -w server/* server",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint"
@@ -18,9 +18,21 @@
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "nodemon": "^3.1.0",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.1"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [
+      "node_modules",
+      ".next"
+    ],
+    "watch": [
+      "server/**/*"
+    ],
+    "ext": "js json"
   }
 }

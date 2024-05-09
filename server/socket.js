@@ -1,13 +1,22 @@
 const { Server } = require('socket.io')
 
-const onSendMessage = () => {}
+const onHandShake = (socket, next) => {
+  const username = socket.handshake.auth.username
 
-const onConnect = (socket) => {
-  console.log('connection up')
-  socket.on('send message', () => {})
+  if (!username) {
+    return next(new Error('Username is required'))
+  }
+
+  if (username.length < 3) {
+    return next(new Error('Username should be 3 or more characters'))
+  }
+
+  socket.username = username
+  socket.emit('login')
+  next()
 }
 
 module.exports = function socket(httpServer) {
   const io = new Server(httpServer)
-  io.on('connection', onConnect)
+  io.use(onHandShake)
 }
