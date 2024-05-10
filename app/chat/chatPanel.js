@@ -8,9 +8,6 @@ export default function ChatPanel({ otherUserId, onBack }) {
   const messageEnd = useRef()
   const [otherUsername, setOtherUsername] = useState('')
   const [messages, setMessages] = useState([])
-  const [messageToSend, setMessageToSend] = useState('')
-
-  const isMessageEmpty = !messageToSend.trim().length
 
   useEffect(() => {
     messageEnd.current.scrollIntoView({ behaviour: 'smooth' })
@@ -21,16 +18,15 @@ export default function ChatPanel({ otherUserId, onBack }) {
     setOtherUsername(username)
   }, [otherUserId])
 
-  const onInput = (e) => setMessageToSend(e.target.value)
-
   const onSend = () => {
-    setMessages((prev) => [...prev, { message: messageToSend, author: 'me' }])
-    setMessageToSend('')
+    const message = inputRef.current?.value
+    setMessages((prev) => [...prev, { message, author: 'me' }])
+    inputRef.current.value = ''
     inputRef.current.focus()
   }
 
   const onEnter = (e) => {
-    if (e.key !== 'Enter' || isMessageEmpty) return
+    if (e.key !== 'Enter' || !inputRef.current?.value.trim().length) return
     onSend()
     e.preventDefault()
   }
@@ -57,16 +53,13 @@ export default function ChatPanel({ otherUserId, onBack }) {
         <form onSubmit={onSend} className="flex h-24 w-full gap-2 px-4 pb-4">
           <textarea
             ref={inputRef}
-            value={messageToSend}
             className="flex-1 rounded-md border border-gray-500 p-4"
             placeholder="Type a message..."
-            onInput={onInput}
             onKeyDown={onEnter}
           ></textarea>
           <button
             type="submit"
             className="rounded-lg border-2 border-gray-900 bg-gray-600 p-6 text-white disabled:opacity-50"
-            disabled={isMessageEmpty}
           >
             Send
           </button>
