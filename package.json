@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon -w server/* server",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server",
     "lint": "next lint"
   },
   "dependencies": {

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Status } from './_components/Status'
-import { CloseButton } from './_components/CloseButton'
-import { NewMessageIcon } from './_components/NewMessageIcon'
-import { usersData } from './mockData'
+import { usersData } from './_mock/mockData'
+
+const NewMessageIcon = () => (
+  <div className="h-2.5 w-2.5 rounded-full bg-sky-500"></div>
+)
 
 export default function Users({
   currentUserId,
@@ -20,11 +22,16 @@ export default function Users({
 
   return (
     <div
-      className={`absolute z-10 h-full w-full overflow-hidden bg-white sm:max-w-sm sm:border-r-2 md:relative md:border-gray-600 ${!isOpen && 'hidden md:block'}`}
+      className={`absolute z-10 h-full w-full overflow-hidden bg-white sm:max-w-sm sm:border-r-2 lg:relative lg:border-gray-600 ${!isOpen && 'hidden lg:block'}`}
     >
       <div className="flex h-20 items-center justify-between border-b-2 p-4">
         <h1 className="text-2xl font-bold uppercase">Messaging App</h1>
-        <CloseButton onClick={onClose} />
+        <button
+          onClick={onClose}
+          className="cursor-pointer p-2 text-xl font-semibold text-gray-600 hover:text-gray-900 lg:hidden"
+        >
+          x
+        </button>
       </div>
       <ul className="h-full overflow-auto">
         {users.map((d) => (
@@ -34,8 +41,12 @@ export default function Users({
             onClick={() => onSelect(d.id)}
           >
             <div>
-              <p className="text-lg font-semibold">{d.username}</p>
-              <Status isActive={d.isActive} />
+              <p className="text-lg font-semibold">{d.username}</p>(
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                <span className="text-xs">online</span>
+              </div>
+              )
             </div>
             {d.hasNewMessage && <NewMessageIcon />}
           </li>

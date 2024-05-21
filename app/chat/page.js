@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import ChatPanel from './chatPanel'
+import ChatPanel from './panel/panel'
 import Users from './users'
 
 export default function Chat() {
@@ -9,7 +9,7 @@ export default function Chat() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="h-dvh md:flex">
+    <div className="h-dvh lg:flex">
       <Users
         isOpen={isOpen}
         currentUserId={currentUserId}
