@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Status } from './_components/Status'
 import { usersData } from './_mock/mockData'
 
 const NewMessageIcon = () => (
